@@ -28,9 +28,7 @@ def toLinesArray(file):
     fileToConvert = os.path.join(sys.path[0], file)
     with open(fileToConvert) as f:
         temp_arr = f.readlines()
-        print(temp_arr)
         array = [line.rstrip('\n') for line in temp_arr]
-    print(array)
     return array
 
 def toWordsArray(line):
@@ -60,4 +58,20 @@ def toAppend(file):
     """
     tfile = os.path.join(sys.path[0], file)
     returnFile = open(tfile, "a")
+    return returnFile
+
+def toCSV(input, output):
+    """	toCSV(file)
+
+    Converte um arquivo .txt em .csv, colocando virgulas no lugar dos espaços
+    Entradas:
+    	input: o arquivo a ser convertido
+        output: o arquivo de saida
+
+    """
+    linesArray = toLinesArray(input)
+    clean(output)
+    returnFile = toAppend(output)
+    for line in linesArray:
+        returnFile.write(line.replace(' ', ', ') + '\n')
     return returnFile
